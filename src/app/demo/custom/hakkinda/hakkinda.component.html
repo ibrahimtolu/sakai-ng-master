@@ -1,0 +1,45 @@
+<h5>Hakkinda</h5>
+
+<div class="card">
+    <label>Gender</label>
+    <div class="mt-5">
+
+        <div class="field-checkbox mt-auto">
+            <p-checkbox label="Female" value="female" [(ngModel)]="gender"></p-checkbox>
+
+            <p-checkbox label="Male" value="male" [(ngModel)]="gender"></p-checkbox>
+
+            <p-checkbox label="Noting" value="noting" [(ngModel)]="gender"></p-checkbox>
+
+        </div>
+        <h5>Dynamic Values</h5>
+        <div *ngFor="let category of categories" class="field-checkbox">
+            <p-checkbox name="group2" value="category" [value]="category" [(ngModel)]="selectedCategories"
+                        [inputId]="category.key" [disabled]="category.key === 'R'"></p-checkbox>
+            <label [for]="category.key">{{category.name}}</label>
+        </div>
+
+    </div>
+</div>
+<div class="card">
+
+</div>
+
+<div class="card">
+    <button pButton type="button" label="click" (click)="hesapla()"></button>
+
+</div>
+
+<div class="card">
+    <p-dropdown [options]="lesson" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+
+
+</div>
+<div class="card">
+    <p-multiSelect [options]="lesson" [(ngModel)]="selectedLessonCodes" optionLabel="name" optionValue="code"></p-multiSelect>
+
+</div>
+
+
+
+

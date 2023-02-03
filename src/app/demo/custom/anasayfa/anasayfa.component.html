@@ -1,0 +1,194 @@
+<div class="card">
+    <!--    <div>
+            <label>{{num}}</label>
+        </div>
+
+        <div class="mb-2">
+            <input type="text" pInputText [(ngModel)]="ad"/>
+        </div>
+
+
+
+        <div *ngFor="let index of nums as i" >
+
+            <label *ngIf="index!==5"    >  {{"  index:"+index}}    </label>
+
+        </div>-->
+
+
+    <button pButton  label="AnasayfaButtonDataDegistir" (click)="changeData()"></button>
+
+    <p-button label="Goto Hakkinda Page" [routerLink]="['hakkinda']"></p-button>
+
+    <app-detail [data]="data" [users]="users"  (myMethod)="onOpen($event)"    > </app-detail>
+
+<!--    <div class="">
+        <p-multiSelect [options]="users" [(ngModel)]="selectedUser" optionLabel="name"
+                       optionValue="code"></p-multiSelect>
+
+
+    </div>-->
+  <div class="card">
+
+        <p-table [value]="users" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>EyeColor</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-users>
+                <tr>
+                    <td>{{users.name}}</td>
+                    <td>{{users.eyeColor}}</td>
+                    <td>{{users.gender}}</td>
+                    <td>{{users.phone}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+
+<!--
+    <div class="card">
+        <h5>Single Column</h5>
+        <p-table [value]="users" [tableStyle]="{'min-width': '60rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="age" style="width:20%">Age <p-sortIcon field="age"></p-sortIcon></th>
+                    <th pSortableColumn="name" style="width:20%">Name <p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="company" style="width:20%">Company <p-sortIcon field="company"></p-sortIcon></th>
+                    <th pSortableColumn="email" style="width:20%">Email <p-sortIcon field="email"></p-sortIcon></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-users>
+                <tr>
+                    <td>{{users.age}}</td>
+                    <td>{{users.name}}</td>
+                    <td>{{users.company}}</td>
+                    <td>{{users.email}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>-->
+
+
+   <!-- <div class="card">
+
+        <h5>Checkbox Selection</h5>
+        <p>Multiple selection can also be handled using checkboxes by enabling the selectionMode property of column as "multiple".</p>
+
+        <h6>Checkbox-Only Selection</h6>
+        <p-table [value]="users" [(selection)]="selectedProducts3" dataKey="_id" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 4rem">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Registered</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-users>
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]="users"></p-tableCheckbox>
+                    </td>
+                    <td>{{users._id}}</td>
+                    <td>{{users.name}}</td>
+                    <td>{{users.address}}</td>
+                    <td>{{users.registered}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+-->
+ <div>
+        <div class="card">
+            <h5>Filter Menu</h5>
+            <p>Filters are displayed in an overlay.</p>
+            <p-table #dt1 [value]="users" dataKey="_id" [(selection)]="selectedUser"
+                     [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+                     [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                     [globalFilterFields]="['name','country','age']">
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                        <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+
+                </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width:5rem"  >
+                            <div class="align-items-center">
+                                Selection
+                            </div>
+                        </th>
+                        <th style="min-width:15rem" pSortableColumn="name" >
+                            <div class="flex justify-content-center align-items-center">
+                                Name
+                                <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="min-width:15rem" pSortableColumn="company">
+                            <div class="flex justify-content-center align-items-center">
+                                Country
+                                <p-columnFilter type="text" field="company" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                        <th style="width: 10rem" pSortableColumn="age">
+                            <div class="flex justify-content-center align-items-center">
+                                Age
+                                <p-columnFilter type="text" field="age" display="menu"></p-columnFilter>
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-users>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="users"></p-tableCheckbox>
+                        </td>
+                        <td>
+                            <span class="flex justify-content-center align-items-center" >{{users.name}}</span>
+                        </td>
+                        <td>
+                            <span class="flex justify-content-center align-items-center"  >{{users.company}}</span>
+                        </td>
+                        <td>
+                            <span class="flex justify-content-center align-items-center" >{{users.age}}</span>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">No users found.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+

@@ -9,7 +9,13 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getUsers() {
-        return this.http.get<any>('assets/demo/data/fortree.json')
+        return this.http.get<any>('assets/demo/data/user.json')
+            .toPromise()
+            .then(res => <User[]> res.data)
+            .then(data => data);
+    }
+    getTreeItem() {
+        return this.http.get<any>('assets/demo/data/user.json')
             .toPromise()
             .then(res => <User[]> res.data)
             .then(data => data);

@@ -12,6 +12,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {FileUploadModule} from "primeng/fileupload";
 import {SliderModule} from "primeng/slider";
 import {DetailComponent} from "../detail/detail.component";
+import {ChildComponent} from "../child/child.component";
 
 @NgModule({
     declarations:[AnasayfaComponent],
@@ -26,7 +27,8 @@ import {DetailComponent} from "../detail/detail.component";
         DropdownModule,
         FileUploadModule,
         SliderModule,
-        DetailComponent
+        DetailComponent,
+        ChildComponent
     ]
 })
 export class AnasayfaModule { }

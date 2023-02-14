@@ -14,12 +14,24 @@ import {AppLayoutComponent} from "./layout/app.layout.component";
                         loadChildren: () => import('./demo/custom/anasayfa/anasayfa.module').then(m => m.AnasayfaModule)
                     },
                     {
+                        path: 'disp',
+                        loadChildren: () => import('./demo/custom/dispatcpackage/disp.module').then(m => m.DispModule)
+                    },
+                    {
                         path: 'parent',
                         loadChildren: () => import('./demo/custom/parent/parent.module').then(m => m.ParentModule)
                     },
                     {
                         path: 'treeevent',
                         loadChildren: () => import('./demo/custom/treeevent/treeevent.module').then(m => m.TreeeventModule)
+                    },
+                    {
+                        path: 'home',
+                        loadChildren: () => import('./demo/custom/home/home.module').then(m => m.HomeModule)
+                    },
+                    {
+                        path: 'name',
+                        loadChildren: () => import('./demo/custom/name/name.module').then(m => m.NameModule)
                     },
                     {
                         path: 'anasayfa',

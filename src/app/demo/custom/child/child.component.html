@@ -8,3 +8,32 @@
     </div>
 </div>
 -->
+<div>
+
+    <ng-content select="header" ></ng-content>
+
+    <ng-content select="content" ></ng-content>
+
+    <ng-content select="footer" ></ng-content>
+
+
+</div>
+
+<div class="card">
+    <h5>My List</h5>
+    <p-table [value]="selectedFiles" [tableStyle]="{'min-width': '60rem'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="label" style="width:20%">Name <p-sortIcon field="age"></p-sortIcon></th>
+                <th pSortableColumn="data" style="width:20%">About <p-sortIcon field="name"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-users>
+            <tr>
+                <td>{{users.label}}</td>
+                <td>{{users.data}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+

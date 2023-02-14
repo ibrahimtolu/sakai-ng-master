@@ -1,72 +1,145 @@
-{"data":[
-    {
-        "key": "0",
-        "_id": "5e652aa6baec2fe6fea7ed2c",
-        "index": 0,
-        "longitude": -120.599697,
-        "friends": [
-            {
-                "key": "0-0",
-                "id": 0,
-                "name": "Meagan Ray"
-            },
-            {
-                "key": "0-1",
-                "id": 1,
-                "name": "Salas Macdonald"
-            },
-            {
-                "key": "0-2",
-                "id": 2,
-                "name": "Diaz Gill"
-            }
-        ]
-    },
-    {
-        "key": "1",
-        "_id": "5e652aa69cb94a55a21dbd24",
-        "index": 1,
-        "longitude": 91.043976,
-        "friends": [
-            {
-                "key": "1-0",
-                "id": 0,
-                "name": "Payne Santana"
-            },
-            {
-                "key": "1-1",
-                "id": 1,
-                "name": "Klein Woods"
-            },
-            {
-                "key": "1-2",
-                "id": 2,
-                "name": "Beck Mosley"
-            }
-        ]
-    },
+{
+    "data": [
+        {
+            "key": "0",
+            "label": "Kitap",
+            "data": "Documents Folder",
+            "children": [
+                {
+                    "key": "0-0",
+                    "label": "Lafontane",
+                    "data": "Work Folder",
+                    "children": [
+                        {
+                            "key": "0-0-0",
+                            "label": "LeylekveTilki.doc",
+                            "data": "Expenses Document"
+                        },
+                        {
+                            "key": "0-0-1",
+                            "label": "Ayi.doc",
+                            "data": "Resume Document"
+                        }
+                    ]
+                },
+                {
+                    "key": "0-1",
+                    "label": "Omer Seyfettin",
+                    "data": "Home Folder",
+                    "children":[
+                        {
+                            "key": "0-1-0",
+                            "label": "Kirmizi Bisiklet",
+                            "data": "Expenses Document"
+                        },
+                        {
+                            "key": "0-1-1",
+                            "label": "Kasagi",
+                            "data": "Expenses Document"
+                        }
 
-    {
-        "key": "2",
-        "_id": "5e652aa6c092ae931fa4ffab",
-        "longitude": -137.669166,
-        "friends": [
-            {
-                "key": "2-0",
-                "id": 0,
-                "name": "Allison Bailey"
-            },
-            {
-                "key": "2-1",
-                "id": 1,
-                "name": "Jessica Holland"
-            },
-            {
-                "key": "2-2",
-                "id": 2,
-                "name": "Battle Hood"
-            }
-        ]
-    }
-]
+                    ]
+
+                }
+            ]
+        },
+        {
+            "key": "1",
+            "label": "Tiyatro",
+            "data": "Events Folder",
+            "children": [
+                {
+                    "key": "1-0",
+                    "label": "Hacıvat ve Karagöz",
+                    "data": "Meeting"
+                },
+                {
+                    "key": "1-1",
+                    "label": "Nasrettin Bro",
+                    "data": "Product Launch",
+                    "children": [
+                        {
+                            "key": "1-2-0",
+                            "label": "Bro in House Party",
+                            "data": "Report Review"
+                        },
+                        {
+                            "key": "1-2-1",
+                            "label": "Pary ROCK",
+                            "data": "Report Review"
+                        }
+                    ]
+                },
+                {
+                    "key": "1-2",
+                    "label": "Kel Evlat",
+                    "data": "Report Review",
+                    "children": [
+                        {
+                            "key": "1-2-0",
+                            "label": "Kel Evlat Perde 1",
+                            "data": "Report Review"
+                        },
+                        {
+                            "key": "1-2-1",
+                            "label": "Kel Evlat Perde 2",
+                            "data": "Report Review"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "2",
+            "label": "Film",
+            "data": "Movies Folder",
+            "children": [
+                {
+                    "key": "2-0",
+                    "label": "Al Pacino",
+                    "data": "Pacino Movies",
+                    "children": [
+                        {
+                            "key": "2-0-0",
+                            "label": "Scarface",
+                            "data": "Scarface Movie"
+                        },
+                        {
+                            "key": "2-0-1",
+                            "label": "Serpico",
+                            "data": "Serpico Movie"
+                        },
+                        {
+                            "key": "2-0-2",
+                            "label": "Köstebek",
+                            "data": "Köstebek Movie"
+                        }
+                    ]
+                },
+                {
+                    "key": "2-1",
+                    "label": "Robert De Niro",
+                    "data": "De Niro Movies",
+                    "children": [
+                        {
+                            "key": "2-1-0",
+                            "label": "Goodfellas",
+                            "data": "Goodfellas Movie"
+                        },
+                        {
+                            "key": "2-1-1",
+                            "label": "Untouchables",
+                            "data": "Untouchables Movie"
+                        }
+                    ,
+                        {
+                            "key": "2-1-2",
+                            "label": "The God Father",
+                            "data": "The God Father Movie"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }

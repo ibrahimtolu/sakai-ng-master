@@ -18,12 +18,21 @@ import {HakkindaModule} from "./demo/custom/hakkinda/hakkinda.module";
 import {AboutModule} from "./demo/custom/about/about.module";
 import {UserService} from "./demo/service/user.service";
 import {ParentModule} from "./demo/custom/parent/parent.module";
-import {LocationStrategy, NgForOf, NgIf, PathLocationStrategy} from "@angular/common";
+import {AsyncPipe, LocationStrategy, NgForOf, NgIf, PathLocationStrategy} from "@angular/common";
 import {TreeeventModule} from "./demo/custom/treeevent/treeevent.module";
+import {COUNTER_REDUCER} from "./demo/model/counter";
+import {StoreModule} from "@ngrx/store";
+import {counterReducer} from "../store/home/home.reducers";
+import {HomeModule} from "./demo/custom/home/home.module";
+import {HomeComponent} from "./demo/custom/home/home.component";
+import {NameModule} from "./demo/custom/name/name.module";
+import {NameComponent} from "./demo/custom/name/name.component";
+import {NAME_REDUCER} from "./demo/model/name";
+import {nameReducer} from "../store/name/name.reducers";
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent
+        AppComponent, NotfoundComponent,HomeComponent,NameComponent
     ],
     imports: [
         AppRoutingModule,
@@ -38,7 +47,12 @@ import {TreeeventModule} from "./demo/custom/treeevent/treeevent.module";
         AboutModule,
         AnasayfaModule,
         ParentModule,
-        TreeeventModule
+        TreeeventModule,
+         HomeModule,
+        StoreModule.forRoot({ [COUNTER_REDUCER]: counterReducer }),
+        StoreModule.forRoot({ [NAME_REDUCER]: nameReducer }),
+        AsyncPipe,
+        NameModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },

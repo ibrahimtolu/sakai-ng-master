@@ -60,6 +60,7 @@ export class AnasayfaComponent implements OnInit, OnChanges {
             this.users = data;
             this.loading = false;
         });
+
         this.representatives = [
             {name: "Amy Elsner", image: 'amyelsner.png'},
             {name: "Anna Fali", image: 'annafali.png'},

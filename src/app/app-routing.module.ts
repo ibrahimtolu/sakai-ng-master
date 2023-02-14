@@ -18,6 +18,10 @@ import {AppLayoutComponent} from "./layout/app.layout.component";
                         loadChildren: () => import('./demo/custom/dispatcpackage/disp.module').then(m => m.DispModule)
                     },
                     {
+                        path: 'eticaretdashboard',
+                        loadChildren: () => import('./demo/eticaret/dashboard/eticaretdashboard.module').then(m => m.EticaretdashboardModule)
+                    },
+                    {
                         path: 'parent',
                         loadChildren: () => import('./demo/custom/parent/parent.module').then(m => m.ParentModule)
                     },

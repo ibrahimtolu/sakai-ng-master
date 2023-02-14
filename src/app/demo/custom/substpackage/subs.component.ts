@@ -15,7 +15,8 @@ interface Lesson {
 }
 
 @Component({
-    selector: 'app-subs',
+    selector: 'app-s' +
+        'ubs',
     templateUrl: './subst.component.html',
     standalone:true
 

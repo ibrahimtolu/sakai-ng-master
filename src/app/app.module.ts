@@ -29,6 +29,8 @@ import {NameModule} from "./demo/custom/name/name.module";
 import {NameComponent} from "./demo/custom/name/name.component";
 import {NAME_REDUCER} from "./demo/model/name";
 import {nameReducer} from "../store/name/name.reducers";
+import {EticaretdashboardModule} from "./demo/eticaret/dashboard/eticaretdashboard.module";
+import {LoginpageModule} from "./demo/eticaret/loginboard/loginpage.module";
 
 @NgModule({
     declarations: [
@@ -52,7 +54,9 @@ import {nameReducer} from "../store/name/name.reducers";
         StoreModule.forRoot({ [COUNTER_REDUCER]: counterReducer }),
         StoreModule.forRoot({ [NAME_REDUCER]: nameReducer }),
         AsyncPipe,
-        NameModule
+        NameModule,
+        EticaretdashboardModule,
+        
     ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },

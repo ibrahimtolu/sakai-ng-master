@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
-import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { ProductService } from './demo/service/product.service';
 import { CountryService } from './demo/service/country.service';
 import { CustomerService } from './demo/service/customer.service';
@@ -29,12 +28,13 @@ import {NameModule} from "./demo/custom/name/name.module";
 import {NameComponent} from "./demo/custom/name/name.component";
 import {NAME_REDUCER} from "./demo/model/name";
 import {nameReducer} from "../store/name/name.reducers";
-import {EticaretdashboardModule} from "./demo/eticaret/dashboard/eticaretdashboard.module";
-import {LoginpageModule} from "./demo/eticaret/loginboard/loginpage.module";
+import {EticaretdashboardModule} from "./demo/eticaret/component/dashboard/eticaretdashboard.module";
+import {LoginpageModule} from "./demo/eticaret/component/loginboard/loginpage.module";
+import {AdminpageModule} from "./demo/eticaret/component/adminpage/adminpage.module";
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent,HomeComponent,NameComponent
+        AppComponent,HomeComponent,NameComponent
     ],
     imports: [
         AppRoutingModule,
@@ -56,7 +56,8 @@ import {LoginpageModule} from "./demo/eticaret/loginboard/loginpage.module";
         AsyncPipe,
         NameModule,
         EticaretdashboardModule,
-        
+        AdminpageModule
+
     ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },

@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Galaxy s23",
+            "description": "For the best",
+            "image": "https://cdn.vatanbilgisayar.com/Upload/PRODUCT/samsung/thumb/137192-1_large.jpg",
+            "price": 65,
+            "category": "Phone",
+            "inventoryStatus": "OUTOFSTOCK"
+
+        },
+        {
+            "id": 2,
+            "name": "Galaxy s23 +",
+            "description": "For the best+1",
+            "image": "https://cdn.vatanbilgisayar.com/Upload/PRODUCT/samsung/thumb/137192-1_large.jpg",
+            "price": 65,
+            "category": "Phone",
+            "inventoryStatus":"LOWSTOCK"
+        },
+        {
+            "id": 3,
+            "name": "Galaxy s22 Ultra +",
+            "description": "For the best-1",
+            "image": "https://cdn.cimri.io/image/1000x1000/samsunggalaxysultraggbgbraminmpakllceptelefonubordo_580363933.jpg",
+            "price": 65,
+            "category": "Phone",
+            "inventoryStatus": "INSTOCK"
+        }
+    ]
+}

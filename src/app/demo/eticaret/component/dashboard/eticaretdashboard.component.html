@@ -1,0 +1,18 @@
+
+<p-tabMenu [model]="items"></p-tabMenu>
+
+<p-card class="ml-2" header="Advanced Card" subheader="Card Subheader" [style]="{width: '360px'}" styleClass="p-card-shadow">
+    <ng-template pTemplate="header">
+        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png">
+    </ng-template>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+    <ng-template pTemplate="footer">
+        <div class="field col-12 md:col-3">
+            <p-button label="Save" icon="pi pi-check"></p-button>
+            <label for="minmax-buttons">Min-Max Boundaries</label>
+            <p-inputNumber [(ngModel)]="value3" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100">
+            </p-inputNumber>
+        </div>
+    </ng-template>
+</p-card>

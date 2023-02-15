@@ -5,6 +5,8 @@ import {
 import {MessageService} from "primeng/api";
 import {LocalStorageService} from "angular-2-local-storage";
 import {Router} from "@angular/router";
+import {EproductsService} from "../../../service/eproducts.service";
+import {UserService} from "../../../service/user.service";
 
 
 @Component({
@@ -21,13 +23,15 @@ export class LoginComponent   {
 
 
 
-    constructor(private router: Router) {
+    constructor(private router: Router ){
 
         localStorage.setItem("userName","user");
         localStorage.setItem("userPassword","user");
 
         localStorage.setItem("adminName","admin");
         localStorage.setItem("adminPassword","admin");
+
+
 
     }
 

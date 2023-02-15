@@ -2,9 +2,8 @@ import {
     Component, OnInit
 } from '@angular/core';
 import {ConfirmationService,MessageService} from "primeng/api";
-import {EproductsService} from "../../../service/eproducts.service";
 import {eProdoct} from "../../../model/eprodoct";
-import {Product} from "../../../api/product";
+import {EproductsService} from "../../../service/eproducts.service";
 
 
 @Component({
@@ -30,6 +29,7 @@ export class AdminpageComponent implements OnInit  {
     constructor(private productService: EproductsService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
+
         this.productService.geteProducts().then(data => this.products = data);
         this.products.forEach(value => {
             console.log(value);
@@ -99,7 +99,7 @@ export class AdminpageComponent implements OnInit  {
     saveProduct() {
         this.submitted = true;
 
-        if (true) {
+        if (this.product.name?.trim()) {
             if (this.product.id) {
                 this.products[this.findIndexById(this.product.id)] = this.product;
                 this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});

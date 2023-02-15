@@ -31,6 +31,8 @@ import {nameReducer} from "../store/name/name.reducers";
 import {EticaretdashboardModule} from "./demo/eticaret/component/dashboard/eticaretdashboard.module";
 import {LoginpageModule} from "./demo/eticaret/component/loginboard/loginpage.module";
 import {AdminpageModule} from "./demo/eticaret/component/adminpage/adminpage.module";
+import {EproductsService} from "./demo/service/eproducts.service";
+import {ConfirmationService} from "primeng/api";
 
 @NgModule({
     declarations: [
@@ -62,7 +64,7 @@ import {AdminpageModule} from "./demo/eticaret/component/adminpage/adminpage.mod
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService,UserService
+        PhotoService, ProductService,UserService,EproductsService,ConfirmationService
     ],
     bootstrap: [AppComponent]
 })

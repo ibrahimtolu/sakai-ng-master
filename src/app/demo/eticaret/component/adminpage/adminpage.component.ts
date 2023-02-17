@@ -73,17 +73,7 @@ export class AdminpageComponent implements OnInit  {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 this.products = this.products.filter(val => val.id !== product.id);
-                this.product = {
-                    id: "",
-                    name:"",
-                    description:"",
-                    image:"",
-                    price:0,
-                    category:"",
-                    amount:0
-
-
-                };
+                this.product = {} as eProdoct;
 
                 this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
             }

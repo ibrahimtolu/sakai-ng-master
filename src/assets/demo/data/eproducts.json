@@ -9,7 +9,8 @@
             "price": 100,
             "category": "Phone",
             "inventoryStatus": "OUTOFSTOCK",
-            "amount": 1
+            "amount": 1,
+            "stock": 0
 
         },
 
@@ -21,6 +22,7 @@
             "price": 205,
             "category": "Phone",
             "inventoryStatus":"LOWSTOCK",
+            "stock": 5,
             "amount": 1
         },
 
@@ -32,7 +34,8 @@
             "price":  65,
             "category": "Phone",
             "inventoryStatus": "INSTOCK",
-            "amount": 1
+            "amount": 1,
+            "stock": 250
         }
     ]
 }

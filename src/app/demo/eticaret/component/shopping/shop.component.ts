@@ -21,7 +21,7 @@ export class ShopComponent implements OnInit{
     fiyat:number=0;
     productDialog!: boolean;
 
-    products!: eProdoct[];
+    products: eProdoct[]=[];
 
     product!:eProdoct;
 
@@ -35,6 +35,14 @@ export class ShopComponent implements OnInit{
 
     constructor(private productService: EproductsService, private messageService: MessageService, private confirmationService: ConfirmationService) {
         this.items = [];
+  // @ts-ignore
+        this.products=JSON.parse(localStorage.getItem("products"));
+        this.products.forEach(value => {
+            this.totalPrice+=value.price*value.amount;
+        })
+
+
+        console.log(this.product);
     }
 
     addProduct(product:eProdoct){
@@ -81,7 +89,6 @@ export class ShopComponent implements OnInit{
             accept: () => {
 
                 this.products = this.products.filter(val => val.id !== product.id,this.totalPrice-=product.price);
-                this.totalPrice-=this.product.price;
                 console.log(this.totalPrice,this.product.price);
                 this.product = {
                     id: "",
@@ -90,7 +97,8 @@ export class ShopComponent implements OnInit{
                     image:"",
                     price:0,
                     category:"",
-                    amount:0
+                    amount:0,
+                    stock:0
 
 
                 };

@@ -5,6 +5,8 @@ import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {eProdoct} from "../../../model/eprodoct";
 import {EproductsService} from "../../../service/eproducts.service";
 import {Router} from "@angular/router";
+import {arrRemove} from "rxjs/internal/util/arrRemove";
+import {verifyHostBindings} from "@angular/compiler";
 
 
 @Component({
@@ -15,7 +17,7 @@ import {Router} from "@angular/router";
 
 export class EticaretdashboardComponent implements OnInit {
     items!: MenuItem[];
-    value3: number = 0;
+    productAmount: number = 0;
     shopAmount: number = 0;
 
 
@@ -24,12 +26,11 @@ export class EticaretdashboardComponent implements OnInit {
 
     products!: eProdoct[];
 
-    shopProducts!: eProdoct[];
-
+    shopProducts: eProdoct[] = [];
 
 
     product!: eProdoct;
-    shopedProduct: eProdoct[] = [];
+
 
     selectedProducts!: eProdoct [];
 
@@ -37,13 +38,14 @@ export class EticaretdashboardComponent implements OnInit {
 
     statuses!: any[];
 
-    constructor(private productService: EproductsService,private router:Router, private messageService: MessageService, private confirmationService: ConfirmationService) {
+    constructor(private productService: EproductsService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) {
+
+
     }
 
     ngOnInit() {
 
         this.productService.geteProducts().then(data => this.products = data);
-
 
         this.statuses = [
             {label: 'INSTOCK', value: 'instock'},
@@ -63,77 +65,57 @@ export class EticaretdashboardComponent implements OnInit {
         ];
     }
 
-
     shopProduct(product: eProdoct) {
+
         this.product = {...product};
         this.productDialog = true;
-        this.shopAmount+=1;
+
+
     }
 
-    deleteProduct(product: eProdoct) {
-        this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + product.name + '?',
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.products = this.products.filter(val => val.id !== product.id);
-                this.product = {
-                    id: "",
-                    name: "",
-                    description: "",
-                    image: "",
-                    price: 0,
-                    category: "",
-                    amount: 0
-
-
-                };
-
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Deleted',
-                    life: 3000
-                });
-            }
-        });
-    }
 
     hideDialog() {
         this.productDialog = false;
         this.submitted = false;
+
+        // @ts-ignore
     }
 
-    saveProduct() {
+
+    shop() {
+
         this.submitted = true;
-        this.product.name?.trim();
+        if (this.product.name.trim()) {
 
+            if (this.product.id) {
+                console.log("this.product:", this.product)
+                localStorage.setItem("product", JSON.stringify(this.product));
+                this.products[this.findIndexById(this.product.id)] = this.product;
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Successful',
+                    detail: 'Added to Shop',
+                    life: 3000
+                });
 
-        if (this.product.id) {
-            this.products[this.findIndexById(this.product.id)] = this.product;
-            this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Added to Shop', life: 3000});
-        } else {
-            this.product.id = this.createId();
-            this.product.image = 'product-placeholder.svg';
-            this.products.push(this.product);
-            this.shopedProduct.push(this.product);
-            this.messageService.add({
-                severity: 'success',
-                summary: 'Successful',
-                detail: 'Product Created',
-                life: 3000
-            });
+            } else {
+
+            }
+
+            this.products = [...this.products];
+            this.productDialog = false;
+            this.product = {} as eProdoct;
         }
-        console.log(this.shopedProduct.length);
-        this.shopedProduct.forEach(value => {
-            console.log(value.price);
-        })
+        // @ts-ignore
+        let localStoreProduct = JSON.parse(localStorage.getItem("product"));
+        this.shopProducts.push(localStoreProduct);
+        localStorage.setItem("products", JSON.stringify(this.shopProducts));
+        this.shopAmount += 1;
 
-        this.products = [...this.products];
-        this.productDialog = false;
-        this.product = {} as eProdoct;
 
     }
+
+
 
     findIndexById(id: string): number {
         let index = -1;
@@ -145,21 +127,6 @@ export class EticaretdashboardComponent implements OnInit {
         }
 
         return index;
-    }
-
-    createId(): string {
-        let id = '';
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (var i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
-
-
-    shopPageRouter() {
-        this.router.navigate(['shop'])
-
     }
 }
 

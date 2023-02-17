@@ -7,6 +7,7 @@ export interface eProdoct{
     category?:string;
     inventoryStatus?: InventoryStatus;
     amount:number;
+    stock:number;
 }
 interface InventoryStatus {
     label: string;

@@ -45,8 +45,6 @@ export class LoginComponent   {
           alert("Worg user name or Password");
       }
 
-
-
   }
 
 

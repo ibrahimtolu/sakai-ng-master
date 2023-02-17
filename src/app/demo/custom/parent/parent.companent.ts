@@ -43,6 +43,7 @@ export class ParentComponent implements AfterViewInit  {
 */
         this.headerContent.nativeElement.setStyle("font-size","25px");
 
+
     }
     parentString:string="messafe From ParentCompanent";
 }

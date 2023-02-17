@@ -32,7 +32,8 @@ import {EticaretdashboardModule} from "./demo/eticaret/component/dashboard/etica
 import {LoginpageModule} from "./demo/eticaret/component/loginboard/loginpage.module";
 import {AdminpageModule} from "./demo/eticaret/component/adminpage/adminpage.module";
 import {EproductsService} from "./demo/service/eproducts.service";
-import {ConfirmationService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ShopModule} from "./demo/eticaret/component/shopping/shop.module";
 
 @NgModule({
     declarations: [
@@ -56,15 +57,14 @@ import {ConfirmationService} from "primeng/api";
         StoreModule.forRoot({ [COUNTER_REDUCER]: counterReducer }),
         StoreModule.forRoot({ [NAME_REDUCER]: nameReducer }),
         AsyncPipe,
-        NameModule,
-        EticaretdashboardModule,
-        AdminpageModule
+        NameModule
+
 
     ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService,UserService,EproductsService,ConfirmationService
+        PhotoService, ProductService,UserService,EproductsService,ConfirmationService,MessageService
     ],
     bootstrap: [AppComponent]
 })

@@ -21,6 +21,10 @@ import {AppComponent} from "./app.component";
                     {
                         path: 'admin',
                         loadChildren: () => import('./demo/eticaret/component/adminpage/adminpage.module').then(m => m.AdminpageModule)
+                    },
+                    {
+                        path: 'shop',
+                        loadChildren: () => import('./demo/eticaret/component/shopping/shop.module').then(m => m.ShopModule)
                     }
                 ]
             },

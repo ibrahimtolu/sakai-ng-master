@@ -1,11 +1,12 @@
 export interface eProdoct{
     id:string;
-    name?:string;
+    name:string;
     description?:string;
     image?:string;
-    price?:number
+    price:number;
     category?:string;
     inventoryStatus?: InventoryStatus;
+    amount:number;
 }
 interface InventoryStatus {
     label: string;

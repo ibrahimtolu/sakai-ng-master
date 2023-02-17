@@ -20,8 +20,6 @@ import { EventEmitter } from '@angular/core';
 
 export class DetailComponent implements  OnChanges,OnInit   {
 
-    
-
     @Output() myMethod: EventEmitter<any> = new EventEmitter();
 
     cols: any = [];
@@ -50,6 +48,7 @@ export class DetailComponent implements  OnChanges,OnInit   {
         console.log("detailPage"+this.data);
 
     }
+
 }
 
 

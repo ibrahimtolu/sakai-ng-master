@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { EticaretdashboardComponent} from './eticaretdashboard.component';
+import { ShopComponent} from './shop.component';
 import {CommonModule} from "@angular/common";
-import {EticaretdashboardRoutingModule} from "./eticaretdashboard-routing.module";
+import {ShopRoutingModule} from "./shop-routing.module";
 import {FormsModule} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
 import {ChipsModule} from "primeng/chips";
@@ -26,10 +26,10 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {MenubarModule} from "primeng/menubar";
 
 @NgModule({
-    declarations:[EticaretdashboardComponent],
+    declarations:[ShopComponent],
     imports: [
         CommonModule,
-        EticaretdashboardRoutingModule,
+        ShopRoutingModule,
         DividerModule,
         ButtonModule,
         InputTextModule,
@@ -50,4 +50,4 @@ import {MenubarModule} from "primeng/menubar";
         MenubarModule
     ]
 })
-export class EticaretdashboardModule { }
+export class ShopModule { }

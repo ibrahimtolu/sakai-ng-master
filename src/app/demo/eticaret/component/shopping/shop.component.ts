@@ -1,60 +1,61 @@
 import {
-    Component, OnInit
+    Component, ContentChild, Input, OnInit
 } from '@angular/core';
 import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {eProdoct} from "../../../model/eprodoct";
 import {EproductsService} from "../../../service/eproducts.service";
-import {Router} from "@angular/router";
 
 
 @Component({
     selector: 'app-anasayfa',
-    templateUrl: './eticaretdashboard.component.html'
+    templateUrl: './shop.component.html'
 
 })
 
-export class EticaretdashboardComponent implements OnInit {
+export class ShopComponent implements OnInit{
+
     items!: MenuItem[];
-    value3: number = 0;
-    shopAmount: number = 0;
+    value3: number=0;
+    shopAmount:number=0;
 
-
-    fiyat: number = 0;
+    fiyat:number=0;
     productDialog!: boolean;
 
     products!: eProdoct[];
 
-    shopProducts!: eProdoct[];
-
-
-
-    product!: eProdoct;
-    shopedProduct: eProdoct[] = [];
+    product!:eProdoct;
 
     selectedProducts!: eProdoct [];
 
     submitted!: boolean;
 
     statuses!: any[];
+    totalPrice: number=0;
+    amout!: number;
 
-    constructor(private productService: EproductsService,private router:Router, private messageService: MessageService, private confirmationService: ConfirmationService) {
+    constructor(private productService: EproductsService, private messageService: MessageService, private confirmationService: ConfirmationService) {
+        this.items = [];
+    }
+
+    addProduct(product:eProdoct){
+        console.log("heldi");
+        this.products.push(product);
+
+
     }
 
     ngOnInit() {
 
-        this.productService.geteProducts().then(data => this.products = data);
-
-
         this.statuses = [
-            {label: 'INSTOCK', value: 'instock'},
+            {label: 'INSTOCK', value: 'instock',route:"eticaretdashboard"},
             {label: 'LOWSTOCK', value: 'lowstock'},
             {label: 'OUTOFSTOCK', value: 'outofstock'}
         ];
 
         this.items = [
 
-            {label: 'Home', icon: 'pi pi-fw pi-home'},
-            {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
+            {label: 'Home', icon: 'pi pi-fw pi-home' },
+            {label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
             {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
             {label: 'Documentation', icon: 'pi pi-fw pi-file'},
             {label: 'Settings', icon: 'pi pi-fw pi-cog'}
@@ -64,10 +65,12 @@ export class EticaretdashboardComponent implements OnInit {
     }
 
 
+
+
     shopProduct(product: eProdoct) {
         this.product = {...product};
-        this.productDialog = true;
         this.shopAmount+=1;
+        this.productDialog = true;
     }
 
     deleteProduct(product: eProdoct) {
@@ -76,25 +79,23 @@ export class EticaretdashboardComponent implements OnInit {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.products = this.products.filter(val => val.id !== product.id);
+
+                this.products = this.products.filter(val => val.id !== product.id,this.totalPrice-=product.price);
+                this.totalPrice-=this.product.price;
+                console.log(this.totalPrice,this.product.price);
                 this.product = {
                     id: "",
-                    name: "",
-                    description: "",
-                    image: "",
-                    price: 0,
-                    category: "",
-                    amount: 0
+                    name:"",
+                    description:"",
+                    image:"",
+                    price:0,
+                    category:"",
+                    amount:0
 
 
                 };
 
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Product Deleted',
-                    life: 3000
-                });
+                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
             }
         });
     }
@@ -106,32 +107,26 @@ export class EticaretdashboardComponent implements OnInit {
 
     saveProduct() {
         this.submitted = true;
-        this.product.name?.trim();
 
+
+
+        if(this.product.name.trim()){
 
         if (this.product.id) {
             this.products[this.findIndexById(this.product.id)] = this.product;
-            this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Added to Shop', life: 3000});
-        } else {
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Added to Shop', life: 3000});
+        }
+        else {
             this.product.id = this.createId();
             this.product.image = 'product-placeholder.svg';
             this.products.push(this.product);
-            this.shopedProduct.push(this.product);
-            this.messageService.add({
-                severity: 'success',
-                summary: 'Successful',
-                detail: 'Product Created',
-                life: 3000
-            });
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
         }
-        console.log(this.shopedProduct.length);
-        this.shopedProduct.forEach(value => {
-            console.log(value.price);
-        })
 
         this.products = [...this.products];
         this.productDialog = false;
         this.product = {} as eProdoct;
+        }
 
     }
 
@@ -150,17 +145,14 @@ export class EticaretdashboardComponent implements OnInit {
     createId(): string {
         let id = '';
         var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (var i = 0; i < 5; i++) {
+        for ( var i = 0; i < 5; i++ ) {
             id += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return id;
     }
 
 
-    shopPageRouter() {
-        this.router.navigate(['shop'])
 
-    }
 }
 
 

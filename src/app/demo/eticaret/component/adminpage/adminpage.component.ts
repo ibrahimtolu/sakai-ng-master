@@ -31,9 +31,7 @@ export class AdminpageComponent implements OnInit  {
     ngOnInit() {
 
         this.productService.geteProducts().then(data => this.products = data);
-        this.products.forEach(value => {
-            console.log(value);
-        })
+
 
         this.statuses = [
             {label: 'INSTOCK', value: 'instock'},
@@ -65,7 +63,7 @@ export class AdminpageComponent implements OnInit  {
 
     editProduct(product: eProdoct) {
         this.product = {...product};
-        // this.productDialog = true;
+         this.productDialog = true;
     }
 
     deleteProduct(product: eProdoct) {
@@ -81,7 +79,8 @@ export class AdminpageComponent implements OnInit  {
                     description:"",
                     image:"",
                     price:0,
-                    category:""
+                    category:"",
+                    amount:0
 
 
                 };
@@ -98,8 +97,10 @@ export class AdminpageComponent implements OnInit  {
 
     saveProduct() {
         this.submitted = true;
+        this.product.name?.trim();
 
-        if (this.product.name?.trim()) {
+
+
             if (this.product.id) {
                 this.products[this.findIndexById(this.product.id)] = this.product;
                 this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
@@ -114,7 +115,7 @@ export class AdminpageComponent implements OnInit  {
             this.products = [...this.products];
             this.productDialog = false;
             this.product = {} as eProdoct;
-        }
+
     }
 
     findIndexById(id: string): number {

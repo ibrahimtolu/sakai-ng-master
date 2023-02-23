@@ -4,7 +4,7 @@
 
     <div class="align-items-center" style="float: right ">
 
-    <button pButton class="mr-4" icon="pi pi-fw pi-shopping-cart" [routerLink]="['shop']" ><label class="ml-3">{{shopAmount}}</label></button>
+    <button pButton class="mr-4" icon="pi pi-fw pi-shopping-cart" [routerLink]="['shop']" ><label class="ml-3">{{shopAmount | async}}</label></button>
     </div>
 </p-menubar>
 
@@ -39,7 +39,7 @@
 
                 <th pSortableColumn="category" style="min-width:10rem">Category <p-sortIcon field="category"></p-sortIcon></th>
 
-                <th pSortableColumn="inventoryStatus" style="min-width:10rem">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+                <th pSortableColumn="inventoryStatus" style="min-width:10rem">Stock <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
 
                 <th></th>
 
@@ -53,8 +53,7 @@
                 <td><img [src]="product.image " width="100" class="shadow-4"  /></td>
                 <td>{{product.price | currency:'USD'}}</td>
                 <td>{{product.category}}</td>
-                <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span></td>
-                <td>
+                <td> {{product.stock}}  <td>
                     <button pButton pRipple icon="  pi pi-fw pi-shopping-cart" class="p-button-rounded p-button-success mr-2" (click)="shopProduct(product)"></button>
                 </td>
             </tr>

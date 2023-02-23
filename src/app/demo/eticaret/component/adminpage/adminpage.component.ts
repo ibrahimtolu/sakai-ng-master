@@ -4,6 +4,9 @@ import {
 import {ConfirmationService,MessageService} from "primeng/api";
 import {eProdoct} from "../../../model/eprodoct";
 import {EproductsService} from "../../../service/eproducts.service";
+import {Store} from "@ngrx/store";
+import {ProductServiceSpring} from "../../../service/spring.service";
+import {createLogErrorHandler} from "@angular/compiler-cli/ngcc/src/execution/tasks/completion";
 
 
 @Component({
@@ -14,9 +17,10 @@ import {EproductsService} from "../../../service/eproducts.service";
 })
 
 export class AdminpageComponent implements OnInit  {
+
     productDialog!: boolean;
 
-    products!: eProdoct[];
+    products: eProdoct[]=[];
 
     product!:eProdoct;
 
@@ -26,12 +30,14 @@ export class AdminpageComponent implements OnInit  {
 
     statuses!: any[];
 
-    constructor(private productService: EproductsService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+    constructor(private springService:ProductServiceSpring,private store:Store,private productService: EproductsService, private messageService: MessageService, private confirmationService: ConfirmationService) {
+        this.springService.getAllProduct().subscribe((response) => {
+            this.products=response;
+        });
+        console.log(this.products);
+    }
 
     ngOnInit() {
-
-        this.productService.geteProducts().then(data => this.products = data);
-
 
         this.statuses = [
             {label: 'INSTOCK', value: 'instock'},
@@ -46,18 +52,21 @@ export class AdminpageComponent implements OnInit  {
         this.productDialog = true;
     }
 
-    deleteSelectedProducts() {
-        this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected products?',
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-                this.product = {} as eProdoct;
-
-                this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
-            }
-        });
+    deleteSelectedProducts(product:eProdoct) {
+        console.log(product)
+        // this.confirmationService.confirm({
+        //     message: 'Are you sure you want to delete the selected products?',
+        //     header: 'Confirm',
+        //     icon: 'pi pi-exclamation-triangle',
+        //     accept: () => {
+        //         console.log(product);
+        //         this.springService.deleteProduct(product.id);
+        //         this.products = this.products.filter(val => !this.selectedProducts.includes(val));
+        //         this.product = {} as eProdoct;
+        //
+        //         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
+        //     }
+        // });
 
     }
 
@@ -72,9 +81,11 @@ export class AdminpageComponent implements OnInit  {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
+                console.log(product)
+                 this.springService.deleteProduct(product.id);
                 this.products = this.products.filter(val => val.id !== product.id);
                 this.product = {} as eProdoct;
-
+                localStorage.setItem("Products",JSON.stringify(this.products));
                 this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
             }
         });
@@ -85,30 +96,32 @@ export class AdminpageComponent implements OnInit  {
         this.submitted = false;
     }
 
-    saveProduct() {
+    saveProduct(product:eProdoct) {
         this.submitted = true;
-        this.product.name?.trim();
 
 
-
+        if(this.product.name?.trim() ){
             if (this.product.id) {
                 this.products[this.findIndexById(this.product.id)] = this.product;
                 this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
             }
             else {
-                this.product.id = this.createId();
                 this.product.image = 'product-placeholder.svg';
                 this.products.push(this.product);
+
                 this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
             }
+        }
 
+
+        this.springService.saveProduct(product);
             this.products = [...this.products];
             this.productDialog = false;
             this.product = {} as eProdoct;
 
     }
 
-    findIndexById(id: string): number {
+    findIndexById(id: number): number {
         let index = -1;
         for (let i = 0; i < this.products.length; i++) {
             if (this.products[i].id === id) {
@@ -120,14 +133,6 @@ export class AdminpageComponent implements OnInit  {
         return index;
     }
 
-    createId(): string {
-        let id = '';
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for ( var i = 0; i < 5; i++ ) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
 }
 
 

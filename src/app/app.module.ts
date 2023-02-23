@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { AppLayoutModule } from './layout/app.layout.module';
-import { ProductService } from './demo/service/product.service';
-import { CountryService } from './demo/service/country.service';
-import { CustomerService } from './demo/service/customer.service';
-import { EventService } from './demo/service/event.service';
-import { IconService } from './demo/service/icon.service';
-import { NodeService } from './demo/service/node.service';
-import { PhotoService } from './demo/service/photo.service';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppLayoutModule} from './layout/app.layout.module';
+import {ProductService} from './demo/service/product.service';
+import {CountryService} from './demo/service/country.service';
+import {CustomerService} from './demo/service/customer.service';
+import {EventService} from './demo/service/event.service';
+import {IconService} from './demo/service/icon.service';
+import {NodeService} from './demo/service/node.service';
+import {PhotoService} from './demo/service/photo.service';
 import {AnasayfaModule} from "./demo/custom/anasayfa/anasayfa.module";
 import {FormsModule} from "@angular/forms";
 import {ChipsModule} from "primeng/chips";
@@ -19,7 +19,7 @@ import {UserService} from "./demo/service/user.service";
 import {ParentModule} from "./demo/custom/parent/parent.module";
 import {AsyncPipe, LocationStrategy, NgForOf, NgIf, PathLocationStrategy} from "@angular/common";
 import {TreeeventModule} from "./demo/custom/treeevent/treeevent.module";
-import {COUNTER_REDUCER} from "./demo/model/counter";
+import {COUNTER_REDUCER, CounterState} from "./demo/model/counter";
 import {StoreModule} from "@ngrx/store";
 import {counterReducer} from "../store/home/home.reducers";
 import {HomeModule} from "./demo/custom/home/home.module";
@@ -28,16 +28,19 @@ import {NameModule} from "./demo/custom/name/name.module";
 import {NameComponent} from "./demo/custom/name/name.component";
 import {NAME_REDUCER} from "./demo/model/name";
 import {nameReducer} from "../store/name/name.reducers";
-import {EticaretdashboardModule} from "./demo/eticaret/component/dashboard/eticaretdashboard.module";
-import {LoginpageModule} from "./demo/eticaret/component/loginboard/loginpage.module";
-import {AdminpageModule} from "./demo/eticaret/component/adminpage/adminpage.module";
 import {EproductsService} from "./demo/service/eproducts.service";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {ShopModule} from "./demo/eticaret/component/shopping/shop.module";
+import {shopcounterReducer} from "../store/shop/shop.reducers";
+import {SHOP_REDUCER} from "./demo/model/shop";
+import {AuthService} from "./shared/auth.service";
+import {ProductServiceSpring} from "./demo/service/spring.service";
+import {ShopService} from "./demo/service/shop.service";
+import {LoginControlService} from "./demo/service/loginControl.service";
+import {BuyService} from "./demo/service/buy.service";
 
 @NgModule({
     declarations: [
-        AppComponent,HomeComponent,NameComponent
+        AppComponent, HomeComponent, NameComponent
     ],
     imports: [
         AppRoutingModule,
@@ -53,19 +56,22 @@ import {ShopModule} from "./demo/eticaret/component/shopping/shop.module";
         AnasayfaModule,
         ParentModule,
         TreeeventModule,
-         HomeModule,
-        StoreModule.forRoot({ [COUNTER_REDUCER]: counterReducer }),
-        StoreModule.forRoot({ [NAME_REDUCER]: nameReducer }),
-        AsyncPipe,
-        NameModule
-
-
+        HomeModule,
+        StoreModule.forRoot({[COUNTER_REDUCER]: counterReducer}),
+        StoreModule.forRoot({[NAME_REDUCER]: nameReducer}),
+        StoreModule.forRoot({[SHOP_REDUCER]: shopcounterReducer}),
+        NameModule,
+        AsyncPipe
     ],
+
     providers: [
-        { provide: LocationStrategy, useClass: PathLocationStrategy },
+        {provide: LocationStrategy, useClass: PathLocationStrategy},
+        {provide: "url", useValue: "http://localhost:8080/"}, ProductServiceSpring,
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService,UserService,EproductsService,ConfirmationService,MessageService
+        PhotoService, ProductService, UserService, EproductsService, ConfirmationService, MessageService, AuthService,
+        ShopService, LoginControlService,BuyService
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

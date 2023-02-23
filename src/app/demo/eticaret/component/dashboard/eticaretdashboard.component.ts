@@ -5,47 +5,45 @@ import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {eProdoct} from "../../../model/eprodoct";
 import {EproductsService} from "../../../service/eproducts.service";
 import {Router} from "@angular/router";
-import {arrRemove} from "rxjs/internal/util/arrRemove";
-import {verifyHostBindings} from "@angular/compiler";
+import {Store} from "@ngrx/store";
+import {shopInctement} from "../../../../../store/shop/shop.actions";
+import {Observable} from "rxjs";
+import {selectCurrentShop} from "../../../../../store/shop/shop.selectors";
+import {log10} from "chart.js/helpers";
+import {ProductServiceSpring} from "../../../service/spring.service";
+import {ShopService} from "../../../service/shop.service";
 
 
 @Component({
+
     selector: 'app-anasayfa',
     templateUrl: './eticaretdashboard.component.html'
+
 
 })
 
 export class EticaretdashboardComponent implements OnInit {
+
     items!: MenuItem[];
     productAmount: number = 0;
-    shopAmount: number = 0;
-
-
-    fiyat: number = 0;
+    test: number = 0
+    shopAmount!: Observable<number>;
     productDialog!: boolean;
-
-    products!: eProdoct[];
-
+    products!: eProdoct[] ;
     shopProducts: eProdoct[] = [];
-
-
     product!: eProdoct;
-
-
     selectedProducts!: eProdoct [];
-
     submitted!: boolean;
-
     statuses!: any[];
 
-    constructor(private productService: EproductsService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) {
+    constructor(private shopService:ShopService,private productServiceSpring:ProductServiceSpring,private store: Store, private productService: EproductsService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) {
 
-
+        this.productServiceSpring.getAllProduct().subscribe((response) => {
+            this.products=response;
+        });
     }
 
     ngOnInit() {
-
-        this.productService.geteProducts().then(data => this.products = data);
 
         this.statuses = [
             {label: 'INSTOCK', value: 'instock'},
@@ -54,22 +52,20 @@ export class EticaretdashboardComponent implements OnInit {
         ];
 
         this.items = [
-
             {label: 'Home', icon: 'pi pi-fw pi-home'},
             {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
             {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
             {label: 'Documentation', icon: 'pi pi-fw pi-file'},
             {label: 'Settings', icon: 'pi pi-fw pi-cog'}
-
-
         ];
+
+        this.shopAmount = this.store.select(selectCurrentShop);
     }
 
     shopProduct(product: eProdoct) {
 
         this.product = {...product};
         this.productDialog = true;
-
 
     }
 
@@ -78,56 +74,46 @@ export class EticaretdashboardComponent implements OnInit {
         this.productDialog = false;
         this.submitted = false;
 
-        // @ts-ignore
+
     }
 
 
     shop() {
-
         this.submitted = true;
-        if (this.product.name.trim()) {
+        this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Added to Shop',
+            life: 3000
+        });
+        console.log("ThisPro",this.product);
 
-            if (this.product.id) {
-                console.log("this.product:", this.product)
-                localStorage.setItem("product", JSON.stringify(this.product));
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Added to Shop',
-                    life: 3000
-                });
+        this.shopService.addShop(this.product);
 
-            } else {
+        this.productDialog = false;
+        console.log(this.shopProducts)
 
+        this.store.dispatch(shopInctement());
+        this.product = {} as eProdoct;
+
+    }
+
+    shopControl(): boolean {
+
+        let status: boolean = true;
+
+        this.shopProducts.forEach(value => {
+            if (value.id == this.product.id) {
+                value.amount++;
+                status = false;
             }
+        });
 
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {} as eProdoct;
-        }
-        // @ts-ignore
-        let localStoreProduct = JSON.parse(localStorage.getItem("product"));
-        this.shopProducts.push(localStoreProduct);
-        localStorage.setItem("products", JSON.stringify(this.shopProducts));
-        this.shopAmount += 1;
-
+        return status;
 
     }
 
 
-
-    findIndexById(id: string): number {
-        let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
-                index = i;
-                break;
-            }
-        }
-
-        return index;
-    }
 }
 
 

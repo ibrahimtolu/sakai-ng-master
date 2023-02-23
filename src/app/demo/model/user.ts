@@ -1,32 +1,19 @@
-import {TreeNode} from "primeng/api";
-
-export interface Address {
-    address: string;
+interface  UserType {
+    userTypeId:number;
+     userTypeName:String;
 }
 
-export interface Friends {
-    id: number;
-    name: string;
-}
+export interface User  {
 
-export interface User extends TreeNode{
-    index: number;
-    quid: string;
-    name: string;
-    egeColor: string
-    phone: number;
-    address: Address;
-    company: string;
-    balance: string;
-    age: number;
-    email: string;
-    isActive: boolean;
-    longitude: number;
-    registered: Date;
-    guid: string;
-    about: string;
-    tag?: string;
+    userId:number;
+    userName:String;
+    userPassword:String;
+    active:boolean;
+    userType:UserType;
 
-    friends?: Friends[];
+
+
+
+
 
 }

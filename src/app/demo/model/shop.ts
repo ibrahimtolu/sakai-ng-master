@@ -1,6 +1,5 @@
-export interface Shop{
-    id:string;
-    name:string;
-    price:string;
+export const SHOP_REDUCER='SHOP_REDUCER';
+export interface ShopState{
+    current:number;
 
 }

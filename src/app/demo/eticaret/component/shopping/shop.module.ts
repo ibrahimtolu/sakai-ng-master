@@ -24,6 +24,7 @@ import {ToolbarModule} from "primeng/toolbar";
 import {ToastModule} from "primeng/toast";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {MenubarModule} from "primeng/menubar";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
     declarations:[ShopComponent],
@@ -47,7 +48,8 @@ import {MenubarModule} from "primeng/menubar";
         FileUploadModule,
         ToastModule,
         InputTextareaModule,
-        MenubarModule
+        MenubarModule,
+        CheckboxModule
     ]
 })
 export class ShopModule { }

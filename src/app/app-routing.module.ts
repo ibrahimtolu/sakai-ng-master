@@ -1,7 +1,13 @@
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {AppLayoutComponent} from "./layout/app.layout.component";
 import {AppComponent} from "./app.component";
+import {LoginComponent} from "./demo/eticaret/component/loginboard/login.component";
+import {AuthService} from "./shared/auth.service";
+import {UserGuard} from "./shared/user.guard";
+import {AdminGuard} from "./shared/admin.guard";
+
+
 
 @NgModule({
     imports: [
@@ -25,11 +31,6 @@ import {AppComponent} from "./app.component";
                     {
                         path: 'eticaretdashboard/shop',
                         loadChildren: () => import('./demo/eticaret/component/shopping/shop.module').then(m => m.ShopModule)
-                    },
-
-                    {
-                        path: 'p',
-                        loadChildren: () => import('./demo/custom/parent/parent.module').then(m => m.ParentModule)
                     }
 
                 ]

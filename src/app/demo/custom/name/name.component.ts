@@ -5,7 +5,6 @@ import {async, Observable} from "rxjs";
 import {Store} from "@ngrx/store";
 import {selectNameChange} from "../../../../store/name/name.selectors";
 import {change} from "../../../../store/name/name.actions";
-import {Name} from "../../model/name";
 
 
 @Component({
@@ -28,8 +27,8 @@ export class NameComponent implements OnInit{
     }
 
     ngOnInit(): void {
-       this.names.subscribe((namess)=>{
-           this.namess=namess;
+       this.names.subscribe((value)=>{
+           this.namess=value;
        });
     }
 

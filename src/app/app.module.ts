@@ -17,7 +17,7 @@ import {HakkindaModule} from "./demo/custom/hakkinda/hakkinda.module";
 import {AboutModule} from "./demo/custom/about/about.module";
 import {UserService} from "./demo/service/user.service";
 import {ParentModule} from "./demo/custom/parent/parent.module";
-import {AsyncPipe, LocationStrategy, NgForOf, NgIf, PathLocationStrategy} from "@angular/common";
+import {AsyncPipe, CurrencyPipe, LocationStrategy, NgForOf, NgIf, PathLocationStrategy} from "@angular/common";
 import {TreeeventModule} from "./demo/custom/treeevent/treeevent.module";
 import {COUNTER_REDUCER, CounterState} from "./demo/model/counter";
 import {StoreModule} from "@ngrx/store";
@@ -37,10 +37,16 @@ import {ProductServiceSpring} from "./demo/service/spring.service";
 import {ShopService} from "./demo/service/shop.service";
 import {LoginControlService} from "./demo/service/loginControl.service";
 import {BuyService} from "./demo/service/buy.service";
+import {HomepageModule} from "./demo/eticaret/component/homepage/homepage.module";
+import {HomepageComponent} from "./demo/eticaret/component/homepage/homepage.component";
+import {ProductpageModule} from "./demo/eticaret/component/productpage/productpage.module";
+import {DataViewModule} from "primeng/dataview";
+import {RatingModule} from "primeng/rating";
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
     declarations: [
-        AppComponent, HomeComponent, NameComponent
+        AppComponent, HomeComponent, NameComponent,HomepageComponent
     ],
     imports: [
         AppRoutingModule,
@@ -61,7 +67,13 @@ import {BuyService} from "./demo/service/buy.service";
         StoreModule.forRoot({[NAME_REDUCER]: nameReducer}),
         StoreModule.forRoot({[SHOP_REDUCER]: shopcounterReducer}),
         NameModule,
-        AsyncPipe
+        AsyncPipe,
+        HomepageModule,
+        CurrencyPipe,
+        ProductpageModule,
+        DataViewModule,
+        RatingModule,
+        DropdownModule
     ],
 
     providers: [

@@ -78,12 +78,10 @@
         </div>
 
         <div class="field">
-            <label >Inventory Status</label>
-            <p-dropdown [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" [options]="statuses" placeholder="Select">
-                <ng-template let-option pTemplate="item">
-                    <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
-                </ng-template>
-            </p-dropdown>
+            <label for="stock">STOCK</label>
+            <input type="text" pInputText id="stock"  [(ngModel)]="product.stock" required  />
+
+
         </div>
 
         <div class="field">

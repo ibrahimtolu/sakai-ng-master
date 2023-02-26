@@ -23,21 +23,22 @@ import {NgSwitch} from "@angular/common";
 
 export class ChildComponent implements AfterContentInit {
     @ContentChild("header") headerContent!: ElementRef;
-    num:number=0;
+    num: number = 0;
 
+
+
+    @Input() testString!: string;
+    @Input() selectedFiles!: User[];
+    sayi!: number;
+
+    numIncrement() {
+        this.num++;
+    }
     ngAfterContentInit() {
         console.log(2);
 
     }
 
-
- @Input()  testString!:string;
-    @Input() selectedFiles!: User[];
-    sayi!: number;
-
-    numIncrement(){
-        this.num++;
-    }
 
 
     numDecrease() {
@@ -47,6 +48,7 @@ export class ChildComponent implements AfterContentInit {
     constructor() {
 
     }
+
     alert() {
         console.log(this.testString);
     }

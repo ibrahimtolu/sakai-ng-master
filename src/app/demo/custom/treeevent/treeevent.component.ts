@@ -49,13 +49,13 @@ export class TreeeventComponent {
 
     }
 
-    nodeSelect($event: any) {
-
-        this.selectedFiles.forEach(events =>{
-            this.selectedItem=events.label;                  });
-
-
-    }
+    // nodeSelect($event: any) {
+    //
+    //     this.selectedFiles.forEach(events =>{
+    //         this.selectedItem=events.label;                  });
+    //
+    //
+    // }
 
     clearItems() {
 

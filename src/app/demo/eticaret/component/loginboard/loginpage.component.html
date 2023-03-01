@@ -1,0 +1,31 @@
+<div   class="flex align-items-center justify-content-center min-h-screen min-w-screen " >
+<div class="card  " >
+    <h5 class=" card-title">Sing In</h5>
+    <div class=" flex card-container flex-wrap">
+
+    <div class="grid">
+        <div class="col-5">
+            <div class="p-fluid">
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input pInputText [(ngModel)]="userName" id="username" type="text" />
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input pInputText [(ngModel)]="userPassword" id="password" type="password" />
+                </div>
+                <p-button (click)="loginControl()"   label="Login"></p-button>
+            </div>
+        </div>
+        <div class="col-2">
+            <p-divider layout="vertical">
+                <b>OR</b>
+            </p-divider>
+        </div>
+        <div class="col-5 flex align-items-center justify-content-center">
+            <p-button label="Sign Up"  icon="pi pi-user-plus" styleClass="p-button-success"></p-button>
+        </div>
+    </div>
+    </div>
+</div>
+</div>

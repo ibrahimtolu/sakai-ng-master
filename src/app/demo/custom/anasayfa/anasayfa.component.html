@@ -117,7 +117,10 @@
             <p-table #dt1 [value]="users" dataKey="_id" [(selection)]="selectedUser"
                      [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
                      [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                     [globalFilterFields]="['name','country','age']">
+                     [globalFilterFields]="['name','country','age']"
+            >
+
+
                 <ng-template pTemplate="caption">
                     <div class="flex">
                         <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>

@@ -29,6 +29,7 @@ export class ShopComponent implements OnInit {
     statuses!: any[];
     totalPrice: number = 0;
     productAmount: number = 0;
+    shopAmount: number=1;
 
     constructor(private store: Store, private shopService: ShopService, private productService: EproductsService,
                 private messageService: MessageService, private confirmationService: ConfirmationService,
@@ -86,8 +87,15 @@ export class ShopComponent implements OnInit {
     }
 
 
-    amountControl(product: eProdoct) {
-        console.log("sss",product)
+    amountControl(product: any) {
+
+        // @ts-ignore
+        let shopAmount=document.getElementById("vertical1").value;
+       product.shopAmount=shopAmount;
+        console.log(product);
+
+
+
 
 
     }
@@ -96,6 +104,7 @@ export class ShopComponent implements OnInit {
         this.products.splice(0);
         this.shopService.getAllShopById(1).subscribe((response) => {
 
+            console.log(response);
             response.forEach((value: any) => {
                 this.product = value;
                 this.products.push(this.product);
@@ -114,6 +123,10 @@ export class ShopComponent implements OnInit {
     }
 
 
+    testM(products: any) {
+        console.log("products",products);
+
+    }
 }
 
 

@@ -43,6 +43,8 @@ import {ProductpageModule} from "./demo/eticaret/component/productpage/productpa
 import {DataViewModule} from "primeng/dataview";
 import {RatingModule} from "primeng/rating";
 import {DropdownModule} from "primeng/dropdown";
+import {CommentService} from "./demo/service/comment.service";
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
     declarations: [
@@ -73,7 +75,8 @@ import {DropdownModule} from "primeng/dropdown";
         ProductpageModule,
         DataViewModule,
         RatingModule,
-        DropdownModule
+        DropdownModule,
+        BrowserModule
     ],
 
     providers: [
@@ -81,7 +84,7 @@ import {DropdownModule} from "primeng/dropdown";
         {provide: "url", useValue: "http://localhost:8080/"}, ProductServiceSpring,
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, UserService, EproductsService, ConfirmationService, MessageService, AuthService,
-        ShopService, LoginControlService,BuyService
+        ShopService, LoginControlService,BuyService,CommentService
     ],
     bootstrap: [AppComponent]
 })

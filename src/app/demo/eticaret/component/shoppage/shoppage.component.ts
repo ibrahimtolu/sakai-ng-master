@@ -87,7 +87,7 @@ export class ShoppageComponent implements OnInit {
 
 
     amountControl(product: eProdoct) {
-        console.log("sss",product)
+        console.log(product.amount)
 
 
     }

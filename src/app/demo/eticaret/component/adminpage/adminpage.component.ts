@@ -133,6 +133,10 @@ export class AdminpageComponent implements OnInit  {
         return index;
     }
 
+    testM(product: any) {
+
+        console.log(product);
+    }
 }
 
 

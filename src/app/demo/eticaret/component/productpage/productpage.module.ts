@@ -15,6 +15,10 @@ import {FileUploadModule} from "primeng/fileupload";
 import {TableModule} from "primeng/table";
 import {SplitterModule} from "primeng/splitter";
 import {TreeTableModule} from "primeng/treetable";
+import {TreeModule} from "primeng/tree";
+import {CommentsComponent} from "../comments/comments.component";
+import {BrowserModule} from "@angular/platform-browser";
+import {RatingModule} from "primeng/rating";
 
 
 @NgModule({
@@ -35,6 +39,9 @@ import {TreeTableModule} from "primeng/treetable";
         TableModule,
         SplitterModule,
         TreeTableModule,
+        TreeModule,
+        CommentsComponent,
+        RatingModule
 
     ]
 })

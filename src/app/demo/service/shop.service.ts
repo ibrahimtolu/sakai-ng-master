@@ -14,6 +14,12 @@ export class ShopService {
         });
 
     }
+    addShopUser(product: any) {
+        let status = this.http.post<any>(this.url + "shop/save/shopuser", product).subscribe(data => {
+            console.log(data)
+        });
+
+    }
 
     getAllShopById(id: number): Observable<any> {
         id = 1;
@@ -21,9 +27,9 @@ export class ShopService {
     }
 
     deleteShopProduct(id:number):Observable<any>{
-
      return    this.http.delete<boolean>(this.url + "shop/delete/" + id);
-
-
+    }
+    updateAmountByShopId(shopUser:any){
+        this.http.post(this.url+"shop/amount",shopUser);
     }
 }

@@ -1,7 +1,7 @@
 <p-menubar [routerLink]="['eticaretdashboard']" [model]="items">
 
 </p-menubar>
-
+<h1>SDFSF</h1>
 
 
 <div class="card">
@@ -76,12 +76,12 @@
                 <td>
 
                     <div>
-                        <p-inputNumber [(ngModel)]="productAmount" [showButtons]="true" buttonLayout="vertical"
+                        <p-inputNumber  [showButtons]="true" buttonLayout="vertical"
                                        spinnerMode="vertical" inputId="vertical"
                                        (click)="amountControl(product)" [min]="1" [max]="products.product.stock"
                                        decrementButtonClass="p-button-secondary "
                                        incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
-                                       decrementButtonIcon="pi pi-minus">
+                                       decrementButtonIcon="pi pi-minus">{{product.amount}}
                         </p-inputNumber>
                     </div>
                 </td>

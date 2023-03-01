@@ -7,6 +7,7 @@ import {ProductServiceSpring} from "../../../service/spring.service";
 
 import {SelectItem} from "primeng/api";
 import {eProdoct} from "../../../model/eprodoct";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -27,7 +28,7 @@ export class HomepageComponent  {
 
     sortField!: string;
 
-    constructor(private productService:ProductServiceSpring) { }
+    constructor(private productService:ProductServiceSpring,private router:Router) { }
 
     ngOnInit() {
         this.productService.getAllProduct().subscribe((data) => {
@@ -53,6 +54,11 @@ export class HomepageComponent  {
             this.sortOrder = 1;
             this.sortField = value;
         }
+    }
+
+    productDetail(product: eProdoct) {
+        localStorage.setItem("Product",JSON.stringify(product));
+        this.router.navigate(['productpage']);
     }
 }
 

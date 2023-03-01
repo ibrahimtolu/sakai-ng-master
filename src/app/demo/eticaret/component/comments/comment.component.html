@@ -1,0 +1,33 @@
+<!--<div   *ngFor="let comment of commentss">-->
+<!--    <ul>-->
+<!--        <li>-->
+<!--            <label>{{comment.userName}}</label>-->
+<!--            {{comment.comments}}-->
+<!--            <app-comments [comments]="comment.children" *ngIf="comment.children"></app-comments>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--<div *ngFor="let comment of commentss2">-->
+
+<!--    <ul>-->
+<!--        <li>-->
+<!--            {{comment.comments}}-->
+<!--            <app-comments [comments2]="comment.children" *ngIf="comment"></app-comments>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<div class="p-fluid grid card " *ngFor="let comment of commentss">
+    <ul>
+        <li>
+            <div class="row">
+                <label>{{comment.userName}}</label>
+                {{comment.comments}}
+                <button>Yanıtla</button>
+                <button>begen</button>
+                <app-comments [comments]="comment.children" *ngIf="comment.children"></app-comments>
+            </div>
+        </li>
+    </ul>
+</div>

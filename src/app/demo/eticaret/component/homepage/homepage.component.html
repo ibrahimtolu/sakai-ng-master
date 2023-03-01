@@ -34,21 +34,27 @@
         <ng-template let-product pTemplate="gridItem">
             <div class="col-12 md:col-4">
                 <div class="product-grid-item card">
-                    <div class="product-grid-item-top">
+                    <div class="product-grid-item-top mt-3">
                         <div>
                             <i class="pi pi-tag product-category-icon"></i>
                             <span class="product-category">{{product.category}}</span>
                         </div>
                         <span  >{{product.inventoryStatus}}</span>
                     </div>
-                    <div class="product-grid-item-content  ">
+                    <div class="product-grid-item-content mt-3 ">
                         <img [src]="product.image" width="80%" height="55%" [alt]="product.name"/>
                         <div class="product-name justify-content-between">{{product.name}}</div>
                         <div class="product-description justify-content-between">{{product.description}}</div>
                     </div>
-                    <div class="product-grid-item-bottom  " >
+                    <div class="product-grid-item-bottom" >
                         <span class="product-price">${{product.price}}</span>
-                        <p-button  icon="pi pi-shopping-cart" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+
+                        <div align="right">
+
+                            <p-button   icon="pi pi-shopping-cart" (click)="productDetail(product)" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+
+
+                        </div>
                     </div>
                 </div>
             </div>

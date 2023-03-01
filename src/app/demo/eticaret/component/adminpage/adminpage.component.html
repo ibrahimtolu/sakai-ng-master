@@ -42,7 +42,7 @@
         <ng-template pTemplate="body" let-product>
             <tr>
                 <td>
-                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                    <p-tableCheckbox (click)="testM(product)" [value]="product"></p-tableCheckbox>
                 </td>
                 <td>{{product.name}}</td>
                 <td><img [src]="product.image " width="100" class="shadow-4" /></td>

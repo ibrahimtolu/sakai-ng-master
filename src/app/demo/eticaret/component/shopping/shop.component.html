@@ -36,8 +36,8 @@
         <ng-template pTemplate="header" >
             <tr>
                 <th>ID</th>
-                <div class="field-checkbox">
-                </div>
+                <th>  </th>
+
                 <th pSortableColumn="name" style="min-width:15rem">Name
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
@@ -75,14 +75,16 @@
                 <td>{{products.product.category}}</td>
                 <td>
 
-                    <div>
-                        <p-inputNumber [(ngModel)]="productAmount" [showButtons]="true" buttonLayout="vertical"
-                                       spinnerMode="vertical" inputId="vertical"
-                                       (click)="amountControl(product)" [min]="1" [max]="products.product.stock"
-                                       decrementButtonClass="p-button-secondary "
-                                       incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
-                                       decrementButtonIcon="pi pi-minus">
-                        </p-inputNumber>
+                    <div class="p-fluid grid ">
+                        <div class="field col-12 md:col-3">
+                            <button [value]="product" (click)="testM(products)">TEST</button>
+                            <p-inputNumber (click)="amountControl(product)"  [min]="1"  [max]="10"  [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical" inputId="vertical1" [(ngModel)]="products.amount"
+                                           decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                            </p-inputNumber>
+
+
+
+                        </div>
                     </div>
                 </td>
                 <td>

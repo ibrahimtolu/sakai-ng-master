@@ -15,6 +15,11 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {DividerModule} from "primeng/divider";
 import {RatingModule} from "primeng/rating";
 import {FormsModule} from "@angular/forms";
+import {ToggleButtonModule} from "primeng/togglebutton";
+import {ButtonModule} from "primeng/button";
+import {InputTextModule} from "primeng/inputtext";
+import {RippleModule} from "primeng/ripple";
+import {CheckboxModule} from "primeng/checkbox";
 
 
 @Component({
@@ -26,7 +31,12 @@ import {FormsModule} from "@angular/forms";
         NgForOf,
         DividerModule,
         RatingModule,
-        FormsModule
+        FormsModule,
+        ToggleButtonModule,
+        ButtonModule,
+        InputTextModule,
+        RippleModule,
+        CheckboxModule
     ],
     standalone: true
 
@@ -40,6 +50,9 @@ export class CommentsComponent implements OnInit  {
     @Input()comments2!:any;
 
     commentss:any[]=[];
+    isLike!: boolean;
+    user: string="user";
+    yanitla:boolean=false;
 
 
 
@@ -48,8 +61,16 @@ export class CommentsComponent implements OnInit  {
     }
 
     ngOnInit(): void {
-        console.log("sdsd",this.comments);
         this.commentss=this.comments;
+    }
+
+    commentOperations(comment: Comment) {
+        console.log(comment);
+    }
+
+    yanitlaMetot() {
+        console.log("asdasd")
+        this.yanitla=!this.yanitla;
     }
 }
 

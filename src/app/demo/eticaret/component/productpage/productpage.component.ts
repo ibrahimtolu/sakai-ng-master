@@ -84,7 +84,8 @@ export class ProductpageComponent implements OnInit{
 
         this.comments2 = [
             {id: 1, "userName": "admin", parentID: 0, "comments": "İyi mal"},
-            {id: 2, "userName": "user", parentID: 1, "comments": "hayır degil"}
+            {id: 2, "userName": "user", parentID: 1, "comments": "hayır degil"},
+            {id: 3, "userName": "user", parentID: 2, "comments": "evet iyi mal"}
         ];
 
 
@@ -93,8 +94,7 @@ export class ProductpageComponent implements OnInit{
         let  recursivefunc2 = (list:any[], id = 0) => {
             let array: any[] = [];
             list.forEach((element:any) => {
-                console.log("value pid",element.parentID,"id",element.id);
-                console.log("type pid",typeof element.parentID,"type id", typeof element.id);
+
 
                 if (element.parentID === id) {
                     let children = recursivefunc2(list, element.id);
@@ -111,7 +111,6 @@ export class ProductpageComponent implements OnInit{
         }
         this.commentss=recursivefunc2(list);
 
-        console.log("dblist",this.commentss);
 
 
 

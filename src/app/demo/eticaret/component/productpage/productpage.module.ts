@@ -19,6 +19,7 @@ import {TreeModule} from "primeng/tree";
 import {CommentsComponent} from "../comments/comments.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {RatingModule} from "primeng/rating";
+import {DividerModule} from "primeng/divider";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {RatingModule} from "primeng/rating";
         TreeTableModule,
         TreeModule,
         CommentsComponent,
-        RatingModule
+        RatingModule,
+        DividerModule
 
     ]
 })

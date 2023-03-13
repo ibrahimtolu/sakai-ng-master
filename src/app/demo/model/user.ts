@@ -1,19 +1,15 @@
 interface  UserType {
     userTypeId:number;
-     userTypeName:String;
+    userTypeName:String;
 }
 
 export interface User  {
 
-    userId:number;
-    userName:String;
-    userPassword:String;
-    active:boolean;
-    userType:UserType;
-
-
-
-
+    userId?:number;
+    userName?:String;
+    userPassword?:String;
+    active?:boolean;
+    userType?:UserType;
 
 
 }

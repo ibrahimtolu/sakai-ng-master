@@ -36,19 +36,19 @@ export class LoginComponent {
     }
 
     loginControl() {
+
         this.user={
-            userId:0,
             userName:this.userName,
-            userPassword:this.userPassword,
-            active:true,
-            userType:{
-                userTypeId:1,
-                userTypeName:"user"
-            }
+            userPassword:this.userPassword
         }
 
+
         this.loginService.loginControl(this.user).subscribe((data)=>{
-            localStorage.setItem("User",JSON.stringify(data));
+
+            this.user=data;
+            localStorage.setItem("User",JSON.stringify(this.user));
+            localStorage.setItem("UserId",JSON.stringify(this.user.userId));
+
             if(data.userTypeId==1)
                 this.router.navigate(["eticaretdashboard"])
             else if(data.userTypeId==2)

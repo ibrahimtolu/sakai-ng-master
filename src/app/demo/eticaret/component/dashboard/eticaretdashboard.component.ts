@@ -12,6 +12,7 @@ import {selectCurrentShop} from "../../../../../store/shop/shop.selectors";
 import {log10} from "chart.js/helpers";
 import {ProductServiceSpring} from "../../../service/spring.service";
 import {ShopService} from "../../../service/shop.service";
+import {ShopUser} from "../../../model/ShopUser";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class EticaretdashboardComponent implements OnInit {
 
     items!: MenuItem[];
     productAmount: number = 0;
+
     test: number = 0
     shopAmount!: Observable<number>;
     productDialog!: boolean;
@@ -64,6 +66,7 @@ export class EticaretdashboardComponent implements OnInit {
 
     shopProduct(product: eProdoct) {
 
+
         this.product = {...product};
         this.productDialog = true;
 
@@ -79,6 +82,7 @@ export class EticaretdashboardComponent implements OnInit {
 
 
     shop() {
+
         this.submitted = true;
         this.messageService.add({
             severity: 'success',
@@ -86,9 +90,21 @@ export class EticaretdashboardComponent implements OnInit {
             detail: 'Added to Shop',
             life: 3000
         });
-        console.log("ThisPro",this.product);
+        console.log("ThisPro",this.product);3
 
-        this.shopService.addShop(this.product);
+        // @ts-ignore
+        let userId= Number(JSON.parse(localStorage.getItem('UserId')));
+        let shopUser:ShopUser;
+        shopUser= {
+            product:this.product,
+            user:{
+                userId:userId
+            },
+
+        };
+
+
+        this.shopService.addShop(shopUser);
 
         this.productDialog = false;
         console.log(this.shopProducts)

@@ -3,15 +3,10 @@ import {
 } from '@angular/core';
 import {ConfirmationService, MenuItem, MessageService, TreeNode} from "primeng/api";
 import {eProdoct} from "../../../model/eprodoct";
-import {EproductsService} from "../../../service/eproducts.service";
-import {Store} from "@ngrx/store";
-import {shopDecrement} from "../../../../../store/shop/shop.actions";
-import {ShopService} from "../../../service/shop.service";
-import {BuyService} from "../../../service/buy.service";
+
 import {NodeService} from "../../../service/node.service";
 import {CommentService} from "../../../service/comment.service";
-import {CommentsComponent} from "../comments/comments.component";
-import {Comment} from "../../../model/comment";
+import {ProductComment} from "../../../model/comment";
 
 
 @Component({
@@ -21,31 +16,42 @@ import {Comment} from "../../../model/comment";
 
 })
 
-export class ProductpageComponent implements OnInit{
+export class ProductpageComponent implements OnInit {
 
     product!: eProdoct;
     files!: TreeNode[];
-    comments: Comment[]=[];
-    comments2 : Comment[]=[];
-    commentss:any[]=[];
+    userId:number;
+
+    @Input()
+    testList!: any[];
+
+    newCommet!: ProductComment;
+
+    addComment: string = '';
+    comments: any[] = [];
+    comments2: any[] = [];
+
+    commentss: any[] = [];
 
     cols!: any[];
 
     products: eProdoct[] = [];
-    postComments!: CommentsComponent;
 
     constructor(private nodeService: NodeService, private commentService: CommentService) {
-
-
         // @ts-ignore
         this.product = JSON.parse(localStorage.getItem("Product"));
         this.products.push(this.product);
+
+
+        // @ts-ignore
+        this.userId = JSON.parse(localStorage.getItem("UserId"));
     }
 
-
-
     ngOnInit() {
-        this.listDBTest();
+        this.commentService.getAllCommentByProductId(this.product.id).subscribe((data) => {
+                this.listDBTest1(data);
+            }
+        );
 
 
     }
@@ -54,19 +60,69 @@ export class ProductpageComponent implements OnInit{
 
     }
 
-    listTest(){
+
+    // listDBTest() {
+    //
+    //     this.comments2 = [{
+    //         "comment": "asdfasd",
+    //         "userName": "user",
+    //         "parentID": 2,
+    //         "userId": "1",
+    //         "commentId": 3
+    //     }, {
+    //         "comment": "Boş yapma",
+    //         "userName": "user",
+    //         "parentID": 3,
+    //         "userId": "1",
+    //         "commentId": 12
+    //     }, {
+    //         "comment": "Bu olmadı",
+    //         "userName": "admin",
+    //         "parentID": 0,
+    //         "userId": "2",
+    //         "commentId": 1
+    //     }, {"comment": "ssss", "userName": "admin", "parentID": 1, "userId": "2", "commentId": 2}]
+    //
+    //     let list = this.comments2;
+    //
+    //     let recursivefunc2 = (list: any[], commentId = 0) => {
+    //         let array: any[] = [];
+    //         list.forEach((element: any) => {
+    //
+    //
+    //             if (element.parentID === commentId) {
+    //                 let children = recursivefunc2(list, element.commentId);
+    //
+    //                 if (children.length) {
+    //                     element.children = children;
+    //                 } else {
+    //                     element.children = [];
+    //                 }
+    //                 array.push(element);
+    //             }
+    //         })
+    //         return array;
+    //     }
+    //
+    //     this.commentss = recursivefunc2(list);
+    //
+    //
+    // }
 
 
-        let list=this.comments;
-        let  recursivefunc2 = (list:any[], id = 0) => {
+    listDBTest1(relist: any[]) {
+
+
+        let list = relist;
+        console.log("relist",relist);
+
+        let recursivefunc2 = (list: any[], commentId = 0) => {
             let array: any[] = [];
-            list.forEach((element: {
-                parent_id: number;
-                id: number | undefined;
-                children: any[];
-            }) => {
-                if (element.parent_id === id) {
-                    let children = recursivefunc2(list, element.id);
+            list.forEach((element: any) => {
+
+
+                if (element.parentID === commentId) {
+                    let children = recursivefunc2(list, element.commentId);
 
                     if (children.length) {
                         element.children = children;
@@ -78,45 +134,29 @@ export class ProductpageComponent implements OnInit{
             })
             return array;
         }
-        this.commentss=recursivefunc2(list);
+
+        this.commentss = recursivefunc2(list);
+        console.log("com",this.commentss);
+
+
     }
-    listDBTest(){
-
-        this.comments2 = [
-            {id: 1, "userName": "admin", parentID: 0, "comments": "İyi mal"},
-            {id: 2, "userName": "user", parentID: 1, "comments": "hayır degil"},
-            {id: 3, "userName": "user", parentID: 2, "comments": "evet iyi mal"}
-        ];
 
 
-        let list=this.comments2;
-
-        let  recursivefunc2 = (list:any[], id = 0) => {
-            let array: any[] = [];
-            list.forEach((element:any) => {
+    commentsAdd() {
 
 
-                if (element.parentID === id) {
-                    let children = recursivefunc2(list, element.id);
-
-                    if (children.length) {
-                        element.children = children;
-                    } else {
-                        element.children = [];
-                    }
-                    array.push(element);
-                }
-            })
-            return array;
+        this.newCommet = {
+            comment: this.addComment,
+            parentID: 0,
+            products: this.product,
+            user: {
+                userId: this.userId
+            }
         }
-        this.commentss=recursivefunc2(list);
-
-
-
+        console.log(this.newCommet);
+        this.commentService.saveComment(this.newCommet);
 
     }
-
-
 }
 
 

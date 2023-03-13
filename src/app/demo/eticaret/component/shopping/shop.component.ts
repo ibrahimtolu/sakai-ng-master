@@ -8,6 +8,8 @@ import {Store} from "@ngrx/store";
 import {shopDecrement} from "../../../../../store/shop/shop.actions";
 import {ShopService} from "../../../service/shop.service";
 import {BuyService} from "../../../service/buy.service";
+import {parse} from "@typescript-eslint/parser";
+import {ShopUser} from "../../../model/ShopUser";
 
 
 @Component({
@@ -29,11 +31,11 @@ export class ShopComponent implements OnInit {
     statuses!: any[];
     totalPrice: number = 0;
     productAmount: number = 0;
-    shopAmount: number=1;
+    shopAmount: number = 1;
 
     constructor(private store: Store, private shopService: ShopService, private productService: EproductsService,
                 private messageService: MessageService, private confirmationService: ConfirmationService,
-                private buyService:BuyService) {
+                private buyService: BuyService) {
 
 
         this.updateProductList();
@@ -87,22 +89,34 @@ export class ShopComponent implements OnInit {
     }
 
 
-    amountControl(product: any) {
-
+    amountControl(products: eProdoct) {
+        console.log("products", products);
+        let shopUser!:ShopUser;
         // @ts-ignore
-        let shopAmount=document.getElementById("vertical1").value;
-       product.shopAmount=shopAmount;
-        console.log(product);
+        let userId = Number(JSON.parse(localStorage.getItem('UserId')));
+        // @ts-ignore
+
+        shopUser ={
+            product:products,
+            user:{
+                userId:userId
+            },
 
 
+        }
 
+
+        this.shopService.putShopUser(shopUser);
 
 
     }
 
     updateProductList() {
+
+        // @ts-ignore
+        let userId = Number(JSON.parse(localStorage.getItem('UserId')));
         this.products.splice(0);
-        this.shopService.getAllShopById(1).subscribe((response) => {
+        this.shopService.getAllShopById(userId).subscribe((response) => {
 
             console.log(response);
             response.forEach((value: any) => {
@@ -124,7 +138,27 @@ export class ShopComponent implements OnInit {
 
 
     testM(products: any) {
-        console.log("products",products);
+        console.log("products", products.product);
+        let shopUser!:ShopUser;
+        // @ts-ignore
+        let userId = Number(JSON.parse(localStorage.getItem('UserId')));
+        // @ts-ignore
+
+        shopUser ={
+            shopUserId:products.id,
+            product:products.product,
+            user:{
+                userId:userId
+            },
+            shopAmount:products.shopAmount
+
+
+        }
+
+
+        console.log(shopUser);
+        // this.shopService.putShopUser(shopUser);
+
 
     }
 }

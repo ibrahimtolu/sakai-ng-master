@@ -34,7 +34,7 @@ export class AdminpageComponent implements OnInit  {
         this.springService.getAllProduct().subscribe((response) => {
             this.products=response;
         });
-        console.log(this.products);
+
     }
 
     ngOnInit() {

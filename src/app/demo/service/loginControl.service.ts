@@ -13,9 +13,10 @@ export class LoginControlService {
 
 
     loginControl(user:User){
+        console.log("userC",user);
 
 
-     return    this.http.post<any>(this.url + "login/" , user);
+     return    this.http.post<any>(this.url + "login/control/" , user);
     }
 
 }

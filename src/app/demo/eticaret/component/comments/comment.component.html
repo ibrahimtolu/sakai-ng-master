@@ -18,40 +18,39 @@
 <!--    </ul>-->
 <!--</div>-->
 
-<div class="p-fluid grid card " *ngFor="let comment of commentss">
+<p-divider></p-divider>
+<div class="p-fluid grid  mt-2" *ngFor="let comment of commentss">
     <ul>
         <li>
-            <div class="flex flex-row flex-wrap card-container">
-                <div class="flex align-items-center justify-content-center m-2"><label>{{comment.userName}}:</label>
+
+            <div class=" flex-row flex-wrap card-container">
+                <div class="  align-items-center justify-content-center   ">
+                    <p>{{comment.userName}}: {{comment.comment}}</p>
                 </div>
-                <div
-                    class="flex align-items-center justify-content-center w-4rem h-4rem m-2"> {{comment.comments}}</div>
+
                 <div class="flex align-items-center justify-content-center w-4rem h-4rem m-2">
-                    <p-toggleButton [(ngModel)]="yanitla" onLabel="cancel" offLabel="Answer" onIcon="pi pi-check"
-                                    offIcon="pi pi-times"   ></p-toggleButton>
-                </div>
-                <div class="flex align-items-center justify-content-center m-2">
-                    <p-toggleButton class="align- " onLabel="" onIcon="pi pi-thumbs-up-fill"
+                    <p-toggleButton  class="ml-5" [(ngModel)]="yanitla" onLabel="cancel" offLabel="Answer" onIcon="pi pi-check"
+                                    offIcon="pi pi-times"></p-toggleButton>
+                    <p-toggleButton class="ml-2 " onLabel="" onIcon="pi pi-thumbs-up-fill"
                                     offIcon="pi pi-thumbs-down-fill"
                                     (click)="commentOperations(comment)" [(ngModel)]="isLike"></p-toggleButton>
-
+                    <label class="ml-2">{{comment.likeAmount}}</label>
                 </div>
+
                 <div class="flex align-items-center justify-content-center m-2">
 
                     <div class="col-12" *ngIf="yanitla">
 
                         <div class="p-inputgroup">
-                            <button type="button" pButton pRipple icon="pi pi-check" styleClass="p-button-success"></button>
-                            <input type="text" pInputText placeholder="Vote">
-                            <button type="button" pButton pRipple icon="pi pi-times" styleClass="p-button-danger"></button>
+                            <button type="button" (click)="commentsAdd(comment)" pButton pRipple icon="pi pi-check"
+                                    styleClass="p-button-success"></button>
+                            <input  [(ngModel)]="addComment"  type="text" pInputText placeholder="Your comment">
+                            <button type="button" pButton pRipple icon="pi pi-times"
+                                    styleClass="p-button-danger"></button>
                         </div>
                     </div>
 
                 </div>
-
-
-
-
 
                 <app-comments [comments]="comment.children" *ngIf="comment.children"></app-comments>
             </div>

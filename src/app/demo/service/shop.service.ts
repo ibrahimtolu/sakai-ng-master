@@ -30,8 +30,10 @@ export class ShopService {
 
     }
 
-    getAllShopById(id: number): Observable<any> {
-        return this.http.get<any>(this.url + "shop/getAll/" + id);
+    getAllShopById(id: number) :Observable<ShopUser[]>   {
+
+       return    this.http.get<ShopUser[]>(this.url + "shop/getAll/" + id)
+
     }
 
     deleteShopProduct(id: number): Observable<any> {

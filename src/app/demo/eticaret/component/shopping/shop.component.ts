@@ -1,5 +1,5 @@
 import {
-    Component, ContentChild, Input, OnInit
+    Component, OnInit
 } from '@angular/core';
 import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {eProdoct} from "../../../model/eprodoct";
@@ -24,7 +24,7 @@ export class ShopComponent implements OnInit {
 
     productDialog!: boolean;
 
-    products: eProdoct[] = [];
+    products: ShopUser[] = [];
     product!: eProdoct;
     selectedProducts!: eProdoct [];
     submitted!: boolean;
@@ -89,26 +89,33 @@ export class ShopComponent implements OnInit {
     }
 
 
-    amountControl(products: eProdoct) {
+    amountControl(products: any) {
         console.log("products", products);
         let shopUser!:ShopUser;
         // @ts-ignore
         let userId = Number(JSON.parse(localStorage.getItem('UserId')));
         // @ts-ignore
 
+       this.updateTotalPrice();
+
         shopUser ={
-            product:products,
+            product:products.product,
             user:{
                 userId:userId
             },
-
-
+            shopUserId:products.id,
+            shopAmount:products.shopAmount
         }
+        console.log(shopUser);
 
 
         this.shopService.putShopUser(shopUser);
-
-
+    }
+    updateTotalPrice(){
+        this.totalPrice=0;
+        this.products.forEach(value => {
+            this.totalPrice+=value.shopAmount!*value.product.price;
+        })
     }
 
     updateProductList() {
@@ -116,24 +123,18 @@ export class ShopComponent implements OnInit {
         // @ts-ignore
         let userId = Number(JSON.parse(localStorage.getItem('UserId')));
         this.products.splice(0);
-        this.shopService.getAllShopById(userId).subscribe((response) => {
-
-            console.log(response);
-            response.forEach((value: any) => {
-                this.product = value;
-                this.products.push(this.product);
-            });
-
+        this.shopService.getAllShopById(userId).subscribe(data=>{
+            data.forEach(value => {
+                this.totalPrice+=value.product.price*value.shopAmount!;
+            })
+            this.products=data;
         });
-
     }
 
     buySelectedProducts() {
         this.selectedProducts.forEach(value => {
             this.buyService.addShop(value);
         });
-
-
     }
 
 
@@ -151,15 +152,9 @@ export class ShopComponent implements OnInit {
                 userId:userId
             },
             shopAmount:products.shopAmount
-
-
         }
-
-
         console.log(shopUser);
         // this.shopService.putShopUser(shopUser);
-
-
     }
 }
 

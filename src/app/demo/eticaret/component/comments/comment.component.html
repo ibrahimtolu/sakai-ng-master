@@ -18,42 +18,42 @@
 <!--    </ul>-->
 <!--</div>-->
 
-<p-divider></p-divider>
-<div class="p-fluid grid  mt-2" *ngFor="let comment of commentss">
-    <ul>
-        <li>
+<!--<p-divider></p-divider>-->
+<!--<div class="p-fluid grid  mt-2" *ngFor="let comment of commentss">-->
+<!--    <ul>-->
+<!--        <li>-->
 
-            <div class=" flex-row flex-wrap card-container">
-                <div class="  align-items-center justify-content-center   ">
-                    <p>{{comment.userName}}: {{comment.comment}}</p>
-                </div>
+<!--            <div class=" flex-row flex-wrap card-container">-->
+<!--                <div class="  align-items-center justify-content-center   ">-->
+<!--                    <p>{{comment.userName}}: {{comment.comment}}</p>-->
+<!--                </div>-->
 
-                <div class="flex align-items-center justify-content-center w-4rem h-4rem m-2">
-                    <p-toggleButton  class="ml-5" [(ngModel)]="yanitla" onLabel="cancel" offLabel="Answer" onIcon="pi pi-check"
-                                    offIcon="pi pi-times"></p-toggleButton>
-                    <p-toggleButton class="ml-2 " onLabel="" onIcon="pi pi-thumbs-up-fill"
-                                    offIcon="pi pi-thumbs-down-fill"
-                                    (click)="commentOperations(comment)" [(ngModel)]="isLike"></p-toggleButton>
-                    <label class="ml-2">{{comment.likeAmount}}</label>
-                </div>
+<!--                <div class="flex align-items-center justify-content-center w-4rem h-4rem m-2">-->
+<!--                    <p-toggleButton  class="ml-5" [(ngModel)]="yanitla" onLabel="cancel" offLabel="Answer" onIcon="pi pi-check"-->
+<!--                                    offIcon="pi pi-times"></p-toggleButton>-->
+<!--                    <p-toggleButton class="ml-2 " onLabel="" onIcon="pi pi-thumbs-up-fill"-->
+<!--                                    offIcon="pi pi-thumbs-down-fill"-->
+<!--                                    (click)="commentOperations(comment)" [(ngModel)]="isLike"></p-toggleButton>-->
+<!--                    <label class="ml-2">{{comment.likeAmount}}</label>-->
+<!--                </div>-->
 
-                <div class="flex align-items-center justify-content-center m-2">
+<!--                <div class="flex align-items-center justify-content-center m-2">-->
 
-                    <div class="col-12" *ngIf="yanitla">
+<!--                    <div class="col-12" *ngIf="yanitla">-->
 
-                        <div class="p-inputgroup">
-                            <button type="button" (click)="commentsAdd(comment)" pButton pRipple icon="pi pi-check"
-                                    styleClass="p-button-success"></button>
-                            <input  [(ngModel)]="addComment"  type="text" pInputText placeholder="Your comment">
-                            <button type="button" pButton pRipple icon="pi pi-times"
-                                    styleClass="p-button-danger"></button>
-                        </div>
-                    </div>
+<!--                        <div class="p-inputgroup">-->
+<!--                            <button type="button" (click)="commentsAdd(comment)" pButton pRipple icon="pi pi-check"-->
+<!--                                    styleClass="p-button-success"></button>-->
+<!--                            <input  [(ngModel)]="addComment"  type="text" pInputText placeholder="Your comment">-->
+<!--                            <button type="button" pButton pRipple icon="pi pi-times"-->
+<!--                                    styleClass="p-button-danger"></button>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                </div>
+<!--                </div>-->
 
-                <app-comments [comments]="comment.children" *ngIf="comment.children"></app-comments>
-            </div>
-        </li>
-    </ul>
-</div>
+<!--                <app-comments [comments]="comment.children" *ngIf="comment.children"></app-comments>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->

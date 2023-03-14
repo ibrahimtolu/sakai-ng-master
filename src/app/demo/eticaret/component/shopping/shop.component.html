@@ -32,15 +32,15 @@
             </div>
         </ng-template>
 
-        <ng-template pTemplate="header" >
+        <ng-template pTemplate="header">
             <tr>
                 <th>ID</th>
-                <th>  </th>
+                <th></th>
 
-                <th pSortableColumn="name" style="min-width:15rem">Name
+                <th pSortableColumn="name" style="min-width:10rem">Name
                     <p-sortIcon field="name"></p-sortIcon>
                 </th>
-                <th>Image</th>
+                <th >Image</th>
                 <th pSortableColumn="price">Price
                     <p-sortIcon field="price"></p-sortIcon>
                 </th>
@@ -60,13 +60,17 @@
                 <td>{{rowIndex + 1}}</td>
                 <td>
 
-                        <p-checkbox  [value]="products"  [(ngModel)]="selectedProducts"  ></p-checkbox>
+                    <p-checkbox [value]="products" [(ngModel)]="selectedProducts"></p-checkbox>
 
                 </td>
-                <td>{{products.product.name}}</td>
+                <td>
+
+                        {{products.product.name}}
+
+                </td>
                 <td>
                     <div *ngIf="products.product.image!==null"><img
-                        src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+                        src="{{products.product.image}}"
                         width="100" class="shadow-4"
                         alt="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"/></div>
                 </td>
@@ -76,11 +80,14 @@
 
                     <div class="p-fluid grid ">
                         <div class="field col-12 md:col-3">
-                            <button  (click)="testM(products)">TEST</button>
-                            <p-inputNumber  (click)="amountControl(products)"  [min]="1"  [max]="10"  [showButtons]="true" buttonLayout="vertical" spinnerMode="vertical" [(ngModel)]="products.shopAmount"
-                                           decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+                            <!--                            <button  (click)="testM(products)">TEST</button>-->
+                            <p-inputNumber (click)="amountControl(products)" [min]="1" [max]="10" [showButtons]="true"
+                                           buttonLayout="vertical" spinnerMode="vertical"
+                                           [(ngModel)]="products.shopAmount"
+                                           decrementButtonClass="p-button-secondary"
+                                           incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus"
+                                           decrementButtonIcon="pi pi-minus">
                             </p-inputNumber>
-
 
 
                         </div>
